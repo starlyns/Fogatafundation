@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { PerspectiveCamera } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { SceneView } from "@/components/three/SceneView";
 import { EmberField } from "@/components/three/EmberField";
@@ -56,16 +55,7 @@ export function FinalCta() {
             intensityFromStore
             pixelRatio={device.dpr[1]}
           />
-          {device.postProcessing && (
-            <EffectComposer>
-              <Bloom
-                intensity={1.1}
-                luminanceThreshold={0.15}
-                luminanceSmoothing={0.9}
-                mipmapBlur
-              />
-            </EffectComposer>
-          )}
+          {/* No EffectComposer — see Hero: it blanks drei View compositing. */}
         </SceneView>
 
         {/* Reduced-motion / fallback glow. */}

@@ -1,7 +1,6 @@
 "use client";
 
 import { PerspectiveCamera } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { SceneView } from "@/components/three/SceneView";
 import { HeroGlobe } from "@/components/three/HeroGlobe";
 import { EmberField } from "@/components/three/EmberField";
@@ -39,16 +38,9 @@ export function Hero() {
           intensity={1}
           pixelRatio={device.dpr[1]}
         />
-        {device.postProcessing && (
-          <EffectComposer>
-            <Bloom
-              intensity={0.9}
-              luminanceThreshold={0.2}
-              luminanceSmoothing={0.9}
-              mipmapBlur
-            />
-          </EffectComposer>
-        )}
+        {/* No EffectComposer here: post-processing hijacks the shared canvas
+            that drei Views composite into, blanking the hero's 3D layer on
+            desktop tiers. The emissive materials read as glowing without it. */}
       </SceneView>
 
       {/* Static gradient fallback shown when 3D is off (reduced motion). */}

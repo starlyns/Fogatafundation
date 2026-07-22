@@ -108,4 +108,59 @@
       input.disabled = true;
     });
   }
+
+  /* ---------- Scroll reveal ---------- */
+
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    var singles = ['.section-head', '.container.narrow', '.gap-tagline', '.timeline', '.footer-cta'];
+    var groups = ['.gap-grid', '.door-grid', '.stat-grid', '.covenant-grid', '.chip-row', '.faq-list'];
+
+    // Activate the hidden state only now — if any module above threw, the page
+    // stays fully visible instead of stuck at opacity 0.
+    document.documentElement.classList.add('js');
+
+    singles.forEach(function (sel) {
+      Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {
+        el.classList.add('reveal');
+      });
+    });
+
+    groups.forEach(function (sel) {
+      Array.prototype.forEach.call(document.querySelectorAll(sel), function (grp) {
+        Array.prototype.forEach.call(grp.children, function (child, i) {
+          child.classList.add('reveal');
+          child.style.transitionDelay = Math.min(i * 70, 350) + 'ms';
+        });
+      });
+    });
+
+    var reveal = function (el) { el.classList.add('in'); };
+
+    var revealIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          reveal(entry.target);
+          revealIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function (el) {
+      revealIO.observe(el);
+    });
+
+    // Backstop: if IO's first callback is ever missed, reveal whatever is
+    // already within the viewport once the page has fully loaded.
+    window.addEventListener('load', function () {
+      requestAnimationFrame(function () {
+        Array.prototype.forEach.call(document.querySelectorAll('.reveal:not(.in)'), function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) {
+            reveal(el);
+            revealIO.unobserve(el);
+          }
+        });
+      });
+    });
+  }
 })();

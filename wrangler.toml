@@ -1,0 +1,12 @@
+# Cloudflare Workers static-assets deployment for the Fogata static export.
+# `npm run build` produces ./out (Next.js `output: "export"`), which Workers
+# serves directly via the built-in assets binding — no Worker script required
+# for a purely static site.
+name = "fogata"
+compatibility_date = "2025-01-01"
+
+[assets]
+directory = "./out"
+# Serve pretty URLs and a 404 fallback that matches the exported structure.
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"

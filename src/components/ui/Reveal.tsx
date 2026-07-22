@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ElementType, type ReactNode } from "react";
+import { useRef, type ElementType, type FC, type ReactNode, type Ref } from "react";
 import { gsap } from "@/lib/gsap";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { useExperience } from "@/components/providers/ExperienceProvider";
@@ -29,7 +29,14 @@ export function Reveal({
   delay = 0,
   y = 28,
 }: RevealProps) {
-  const Tag = (as ?? "div") as ElementType;
+  // Cast the polymorphic tag to a loose component signature: only intrinsic
+  // tags are ever passed, and React 19's JSX types can't spread a ref across
+  // the full ElementType union.
+  const Tag = (as ?? "div") as unknown as FC<{
+    ref: Ref<HTMLElement>;
+    className?: string;
+    children?: ReactNode;
+  }>;
   const ref = useRef<HTMLElement>(null);
   const { reducedMotion } = useExperience();
 

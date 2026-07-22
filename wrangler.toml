@@ -2,7 +2,7 @@
 # `npm run build` produces ./out (Next.js `output: "export"`), which Workers
 # serves directly via the built-in assets binding — no Worker script required
 # for a purely static site.
-name = "fogata"
+name = "fogatafundation"
 compatibility_date = "2025-01-01"
 
 [assets]

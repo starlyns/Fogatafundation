@@ -5,9 +5,8 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { SceneView } from "@/components/three/SceneView";
 import { HeroGlobe } from "@/components/three/HeroGlobe";
 import { EmberField } from "@/components/three/EmberField";
-import { MagneticButton } from "@/components/ui/MagneticButton";
+import { Button } from "@/components/ui/Button";
 import { SplitHeading } from "@/components/ui/SplitHeading";
-import { Placeholder } from "@/components/ui/Placeholder";
 import { ANCHORS } from "@/lib/constants";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 
@@ -19,18 +18,7 @@ export function Hero() {
       id="top"
       className="relative flex min-h-[100svh] w-full items-center overflow-hidden"
     >
-      {/* Video placeholder — sits behind the 3D layer at low opacity. */}
-      <div className="absolute inset-0 z-0 opacity-[0.15]">
-        <Placeholder
-          kind="VIDEO"
-          label="Hero background footage"
-          dimensions="1920x1080"
-          description="Dark footage of fire or global landscapes, plays muted/looped behind the 3D layer at ~15% opacity."
-          className="!rounded-none border-0"
-        />
-      </div>
-
-      {/* Radial darkening so text stays legible over any footage. */}
+      {/* Radial darkening so text stays legible over the 3D layer. */}
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,rgba(10,10,11,0.2)_0%,rgba(10,10,11,0.85)_75%)]" />
 
       {/* 3D layer: globe + drifting embers, with bloom on capable devices. */}
@@ -78,9 +66,10 @@ export function Hero() {
         <SplitHeading
           as="h1"
           trigger="mount"
-          className="font-display text-[3.25rem] font-black leading-[0.95] tracking-tight text-textPrimary sm:text-7xl lg:text-8xl"
+          className="font-display text-[3.25rem] font-black leading-[1.05] tracking-tight text-textPrimary sm:text-7xl lg:text-8xl"
         >
-          Every language. One flame.
+          <span className="block">Every language.</span>
+          <span className="block">One flame.</span>
         </SplitHeading>
 
         <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-textMuted sm:text-xl">
@@ -89,12 +78,12 @@ export function Hero() {
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <MagneticButton href={`#${ANCHORS.sponsor}`} variant="primary">
+          <Button href={`#${ANCHORS.sponsor}`} variant="primary">
             Sponsor a language community
-          </MagneticButton>
-          <MagneticButton href={`#${ANCHORS.howItWorks}`} variant="ghost">
+          </Button>
+          <Button href={`#${ANCHORS.howItWorks}`} variant="ghost">
             See how it works
-          </MagneticButton>
+          </Button>
         </div>
       </div>
 

@@ -7,7 +7,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { SceneView } from "@/components/three/SceneView";
 import { EmberField } from "@/components/three/EmberField";
 import { SplitHeading } from "@/components/ui/SplitHeading";
-import { MagneticButton } from "@/components/ui/MagneticButton";
+import { Button } from "@/components/ui/Button";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { scrollState } from "@/lib/store";
@@ -79,12 +79,12 @@ export function FinalCta() {
             A tribe is waiting for your flame.
           </SplitHeading>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <MagneticButton href={`#${ANCHORS.sponsor}`} variant="spark">
+            <Button href={`#${ANCHORS.sponsor}`} variant="spark">
               Sponsor a tribe
-            </MagneticButton>
-            <MagneticButton href={`#${ANCHORS.doorEveryone}`} variant="primary">
+            </Button>
+            <Button href={`#${ANCHORS.doorEveryone}`} variant="primary">
               Donate
-            </MagneticButton>
+            </Button>
           </div>
         </div>
       </section>

@@ -56,7 +56,9 @@ export function SplitHeading({
 
     const ctx = gsap.context(() => {
       split = new SplitText(el, {
-        type: by,
+        // Chars must stay grouped inside word wrappers — splitting by chars
+        // alone lets the browser wrap mid-word.
+        type: by === "chars" ? "words,chars" : "words",
         // Wrap each unit so overflow can clip the rise-in.
         linesClass: "split-line",
       });

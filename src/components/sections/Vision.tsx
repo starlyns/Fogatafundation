@@ -39,7 +39,7 @@ export function Vision() {
       </SceneView>
 
       <div className="relative z-10 mx-auto grid max-w-7xl gap-16 px-6 sm:px-8 lg:grid-cols-2 lg:items-center">
-        <div>
+        <div className="min-w-0">
           <span className="mb-6 inline-block text-xs font-semibold uppercase tracking-[0.35em] text-ember">
             The vision
           </span>
@@ -61,15 +61,16 @@ export function Vision() {
           </div>
         </div>
 
-        {/* Full-bleed image placeholder with parallax. */}
-        <Parallax speed={0.12} className="lg:h-[34rem]">
+        {/* Full-bleed image placeholder with parallax. The wrapper fixes the
+            height — no aspect ratio, which would force the width past the
+            viewport on small screens. */}
+        <Parallax speed={0.12} className="min-w-0 lg:h-[34rem]">
           <div className="h-[24rem] w-full sm:h-[30rem] lg:h-full">
             <Placeholder
               kind="IMAGE"
               label="Nations gathered in firelight"
               dimensions="2400x1400"
               description="Full-bleed photograph: a gathering of people from many nations around firelight."
-              aspect="12 / 7"
             />
           </div>
         </Parallax>

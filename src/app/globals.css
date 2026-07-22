@@ -60,15 +60,6 @@
     outline: 2px solid var(--color-spark);
     outline-offset: 2px;
   }
-
-  /* Hide the native cursor only when the custom cursor is active on fine
-     pointers; touch and reduced setups keep the system cursor. */
-  @media (pointer: fine) {
-    body:not([data-no-custom-cursor]) {
-      /* left default — custom cursor is additive, not a replacement, so the
-         system cursor stays for reliability. */
-    }
-  }
 }
 
 /* ------------------------------------------------------------------ *

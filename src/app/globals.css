@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Design tokens — exposed to Tailwind v4 utilities via @theme.
+ * Colour utility names match the token after `--color-` (e.g. the token
+ * `--color-redOrange` powers `text-redOrange`, `bg-redOrange`, etc.).
+ * ------------------------------------------------------------------ */
+@theme {
+  /* Base — deep charcoal / near-black. `black` is overridden to the brand ink. */
+  --color-black: #0a0a0b;
+  --color-charcoal: #141416;
+  --color-charcoalSoft: #1c1c20;
+
+  /* Fire palette */
+  --color-ember: #ff5722;
+  --color-amber: #ffa726;
+  --color-redOrange: #e03e00;
+  --color-spark: #ffd166;
+
+  /* Text */
+  --color-textPrimary: #f5f1ea;
+  --color-textMuted: #a7a29b;
+
+  /* Fonts (wired to next/font variables set on <html>). */
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ------------------------------------------------------------------ *
+ * Base
+ * ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    /* Lenis owns smooth scrolling; keep native behaviour instant to avoid
+       fighting it. Reduced-motion users get native anchor jumps. */
+    scroll-behavior: auto;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-black);
+    color: var(--color-textPrimary);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(255, 87, 34, 0.35);
+    color: #fff;
+  }
+
+  /* Visible focus for keyboard users everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--color-spark);
+    outline-offset: 2px;
+  }
+
+  /* Hide the native cursor only when the custom cursor is active on fine
+     pointers; touch and reduced setups keep the system cursor. */
+  @media (pointer: fine) {
+    body:not([data-no-custom-cursor]) {
+      /* left default — custom cursor is additive, not a replacement, so the
+         system cursor stays for reliability. */
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Components / utilities
+ * ------------------------------------------------------------------ */
+@layer components {
+  /* Placeholder frame — dark box with an ember border. */
+  .ember-frame {
+    border: 1px solid rgba(255, 87, 34, 0.35);
+    box-shadow: inset 0 0 40px rgba(255, 87, 34, 0.08);
+  }
+
+  /* Participate cards: ember edge-glow that intensifies on hover. */
+  .ember-glow-card {
+    position: relative;
+    isolation: isolate;
+  }
+  .ember-glow-card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      140deg,
+      rgba(255, 87, 34, 0.6),
+      rgba(255, 209, 102, 0.4),
+      transparent 60%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+  }
+  .ember-glow-card:hover::after {
+    opacity: 1;
+  }
+
+  /* SplitText line wrapper (used when splitting by line). */
+  .split-line {
+    overflow: hidden;
+    display: inline-block;
+  }
+}
+
+/* Ecosystem marquee. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 32s linear infinite;
+}
+.group:hover .marquee {
+  animation-play-state: paused;
+}
+
+/* ------------------------------------------------------------------ *
+ * Reduced motion — strip non-essential animation entirely.
+ * ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee {
+    animation: none !important;
+  }
+}

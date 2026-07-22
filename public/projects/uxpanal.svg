@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <rect width="400" height="600" fill="#0d0d0f"/>
+  <rect x="1.5" y="1.5" width="397" height="597" fill="none" stroke="#FF5722" stroke-opacity="0.45" stroke-width="3"/>
+  <text x="200" y="240" text-anchor="middle" fill="#FF5722" font-family="monospace" font-size="13" letter-spacing="4">IMAGE PLACEHOLDER</text>
+  <text x="200" y="290" text-anchor="middle" fill="#F5F1EA" font-family="sans-serif" font-size="30" font-weight="bold">Uxpanal</text>
+  <text x="200" y="330" text-anchor="middle" fill="#FFA726" font-family="monospace" font-size="14">400×600 · @2x retina</text>
+  <text x="200" y="375" text-anchor="middle" fill="#A7A29B" font-family="sans-serif" font-size="13">Portrait: mountain town gathering, Mexico</text>
+</svg>

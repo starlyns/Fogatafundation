@@ -4,6 +4,7 @@ import { Vision } from "@/components/sections/Vision";
 import { Gap } from "@/components/sections/Gap";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Participate } from "@/components/sections/Participate";
+import { Projects } from "@/components/sections/Projects";
 import { Covenant } from "@/components/sections/Covenant";
 import { FirstFire } from "@/components/sections/FirstFire";
 import { Ecosystem } from "@/components/sections/Ecosystem";
@@ -18,6 +19,7 @@ export default function Home() {
       <Gap />
       <HowItWorks />
       <Participate />
+      <Projects />
       <Covenant />
       <FirstFire />
       <Ecosystem />

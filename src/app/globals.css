@@ -108,6 +108,50 @@
   }
 }
 
+/* ------------------------------------------------------------------ *
+ * Project mosaic — ring of fire around the selected tile.
+ * A conic gradient (ember → amber → white) rotating continuously via a
+ * registered custom property; falls back to a static gradient border
+ * where @property is unsupported or motion is reduced.
+ * ------------------------------------------------------------------ */
+@property --fire-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes fire-ring-spin {
+  to {
+    --fire-angle: 360deg;
+  }
+}
+
+.fire-ring {
+  position: absolute;
+  inset: -3px;
+  z-index: 0;
+  border-radius: 19px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--fire-angle),
+    #ff5722,
+    #ffa726 35%,
+    #fff 50%,
+    #ffa726 65%,
+    #ff5722
+  );
+  box-shadow:
+    0 0 24px rgba(255, 87, 34, 0.55),
+    0 0 60px rgba(255, 87, 34, 0.25);
+  animation: fire-ring-spin 3.5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fire-ring {
+    animation: none;
+  }
+}
+
 /* Ecosystem marquee. */
 @keyframes marquee {
   from {

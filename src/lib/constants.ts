@@ -35,6 +35,7 @@ export const ANCHORS = {
   gap: "gap",
   howItWorks: "how-it-works",
   participate: "participate",
+  projects: "projects",
   covenant: "covenant",
   firstFire: "first-fire",
   ecosystem: "ecosystem",
@@ -51,6 +52,7 @@ export const NAV_LINKS = [
   { label: "Vision", href: `#${ANCHORS.vision}` },
   { label: "How it works", href: `#${ANCHORS.howItWorks}` },
   { label: "Participate", href: `#${ANCHORS.participate}` },
+  { label: "Projects", href: `#${ANCHORS.projects}` },
   { label: "FAQ", href: `#${ANCHORS.faq}` },
 ] as const;
 
